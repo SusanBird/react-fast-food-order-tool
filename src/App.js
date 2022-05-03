@@ -1,15 +1,14 @@
 import './App.css';
 import { useState } from 'react';
 import NameInput from './NameInput';
+import FoodDropdown from './FoodDropdown';
 
 function App() {
   const [orderName, setOrderName] = useState('');
+  const [foodId, setFoodId] = useState(1);
+  const [drinkId, setDrinkId] = useState(1);
+  const [sideId, setSideId] = useState(1);
 
-
-  function handleOrderNameChange(e) {
-    console.log(e.target.value);
-    setOrderName(e.target.value);
-  }
 
   return (
     <div className='App'> 
@@ -17,6 +16,7 @@ function App() {
         <h3>Order ready for {orderName}</h3>
       </div>
       <div>
+        <FoodDropdown setFoodId={setFoodId} />
         <NameInput setOrderName={setOrderName} />
       </div>
     </div>
