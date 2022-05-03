@@ -1,24 +1,24 @@
 import './App.css';
 import { useState } from 'react';
+import NameInput from './NameInput';
 
 function App() {
-  const [name, setName] = useState('');
+  const [orderName, setOrderName] = useState('');
 
 
-  function handleNameChange(e) {
+  function handleOrderNameChange(e) {
     console.log(e.target.value);
+    setOrderName(e.target.value);
   }
 
   return (
     <div className='App'> 
-      <header className='App-header'>
-        <div>
-      Order for: {name}
-        </div>
-        <input>
-    onChange={handleNameChange}
-        </input>
-      </header>
+      <div>
+        <h3>Order ready for {orderName}</h3>
+      </div>
+      <div>
+        <NameInput setOrderName={setOrderName} />
+      </div>
     </div>
   );
 }
