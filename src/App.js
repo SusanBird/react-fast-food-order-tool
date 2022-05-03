@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import NameInput from './NameInput';
 import FoodDropdown from './FoodDropdown';
+import DrinkDropdown from './DrinkDropdown';
 
 function App() {
   const [orderName, setOrderName] = useState('');
@@ -17,6 +18,7 @@ function App() {
       </div>
       <div>
         <FoodDropdown setFoodId={setFoodId} />
+        <DrinkDropdown setDrinkId={setDrinkId} />
         <NameInput setOrderName={setOrderName} />
       </div>
     </div>
