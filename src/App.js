@@ -1,24 +1,48 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import NameInput from './NameInput';
+import FoodDropdown from './FoodDropdown';
+import DrinkDropdown from './DrinkDropdown';
+import SideDropdown from './SideDropdown';
+import InstructionsForm from './InstructionsForm';
+import Images from './Images';
+import InstructionsList from './InstructionsList';
 
 function App() {
+  const [orderName, setOrderName] = useState('');
+  const [foodId, setFoodId] = useState(1);
+  const [drinkId, setDrinkId] = useState(1);
+  const [sideId, setSideId] = useState(1);
+  const [instructions, setInstructions] = useState(['Extra Instructions Will Appear Below']);
+  const [instructionInForm, setInstructionInForm] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setInstructions([...instructions, instructionInForm]);
+
+    setInstructionInForm('');
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className='main'> 
+      <div className='App'> 
+        <div>
+          <h1>Order ready for {orderName}</h1>
+          <Images
+            foodId={foodId}
+            drinkId={drinkId}
+            sideId={sideId} />
+        </div>
+        <div className='order-form'>
+          <FoodDropdown setFoodId={setFoodId} />
+          <DrinkDropdown setDrinkId={setDrinkId} />
+          <SideDropdown setSideId={setSideId} />
+          <NameInput setOrderName={setOrderName} />
+          <InstructionsList instructions={instructions}/>
+          <InstructionsForm handleSubmit={handleSubmit} setInstructionInForm={setInstructionInForm} />
+        </div>
+      </div>
+    </main>
   );
 }
 
