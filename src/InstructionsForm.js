@@ -1,26 +1,10 @@
-import { useState } from 'react';
+import React from 'react';
 
-export default function InstructionsForm({ setInstructions, instructions }) {
-
-  const [instructionInForm, setInstructionInForm] = useState('');
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    setInstructions([...instructions, instructionInForm]);
-
-    setInstructionInForm('');
-  }
-
-  function handleInstructionChange(e) {
-    setInstructionInForm(e.target.value);
-  }
-
-  return <form onSubmit={handleSubmit}>
-    <label>
-           New instruction
-      <input required value={instructionInForm} onChange={handleInstructionChange} />
-    </label>
-    <button>Add Instruction</button>
-  </form>;
+export default function InstructionsForm({ handleSubmit, setInstructionInForm }) {
+  return (
+    <form onSubmit={handleSubmit}>
+      <input onChange={e => setInstructionInForm(e.target.value)} />
+      <button>Add instruction</button>
+    </form>
+  );
 }

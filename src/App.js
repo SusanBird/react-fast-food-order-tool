@@ -6,6 +6,7 @@ import DrinkDropdown from './DrinkDropdown';
 import SideDropdown from './SideDropdown';
 import InstructionsForm from './InstructionsForm';
 import Images from './Images';
+import InstructionsList from './InstructionsList';
 
 function App() {
   const [orderName, setOrderName] = useState('');
@@ -13,7 +14,14 @@ function App() {
   const [drinkId, setDrinkId] = useState(1);
   const [sideId, setSideId] = useState(1);
   const [instructions, setInstructions] = useState(['Extra Instructions Will Appear Below']);
+  const [instructionInForm, setInstructionInForm] = useState('');
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    setInstructions([...instructions, instructionInForm]);
+
+    setInstructionInForm('');
+  }
 
   return (
     <main className='main'> 
@@ -24,20 +32,14 @@ function App() {
             foodId={foodId}
             drinkId={drinkId}
             sideId={sideId} />
-          <ul className='instructions-list'>
-            {
-              instructions.map((instruction, i) => <li key={`${instruction}-${i}`}>
-                {instruction}
-              </li>)
-            }
-          </ul>
         </div>
         <div className='order-form'>
           <FoodDropdown setFoodId={setFoodId} />
           <DrinkDropdown setDrinkId={setDrinkId} />
           <SideDropdown setSideId={setSideId} />
           <NameInput setOrderName={setOrderName} />
-          <InstructionsForm instructions={instructions} setInstructions={setInstructions} />
+          <InstructionsList instructions={instructions}/>
+          <InstructionsForm handleSubmit={handleSubmit} setInstructionInForm={setInstructionInForm} />
         </div>
       </div>
     </main>
